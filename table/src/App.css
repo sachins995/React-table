@@ -50,3 +50,91 @@ hr{
   }
   
   
+  .MuiMenuItem-gutters{
+    width: 85%;
+margin: 10px;
+  }
+
+  /* MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 MuiPopover-paper MuiMenu-paper MuiMenu-paper css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper */
+
+css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper{
+    width: 27% !important;
+    display: flex !important;
+    padding-left: 32px !important;
+} 
+
+.css-1crctjg{
+    display: flex;
+    flex-direction: column;
+    width: 85% !important;
+}
+
+.css-12mkuht-MuiList-root-MuiMenu-list{
+    width: 100% !important;
+    padding-left: 20px !important;
+}
+
+
+.created-at{
+    margin-bottom: 5px !important;
+}
+
+.create{
+    position: relative;
+    bottom: 10px !important;
+}
+
+
+/* .calendor{
+   position: relative;
+   top: 10px;
+} */
+
+.css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root{
+    position: relative;
+    top: 10px;
+}
+
+/* .dropdown{
+    border: none;
+} */
+
+.css-6hp17o-MuiList-root-MuiMenu-list{
+    margin-left: 12px !important;
+}
+
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root{
+    border: none !important;
+    background: none !important;
+}
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root:hover{
+    background-color: aliceblue !important;
+}
+
+.css-1p823my-MuiListItem-root{
+         height: 40px !important;
+}
+
+.css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root{
+    margin-bottom: 0px !important;
+}
+
+.css-h4y409-MuiList-root{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root{
+    height: 30px;
+}
+
+.css-10hburv-MuiTypography-root{
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 15px !important;
+}
+
+
+
+/* MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-45yk05-MuiButtonBase-root-MuiMenuItem-root */

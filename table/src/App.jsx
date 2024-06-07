@@ -15,9 +15,10 @@ function App() {
   // const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const [isSortDrawerOpen, setIsSortDrawerOpen] = useState(false);
   const [groupedColumnMode, setGroupedColumnMode] = useState('reorder');
+  const [sortBy, setSortBy] = useState([]);
   const [filters, setFilters] = useState({
     name: "",
-    category: "",
+    category: [],
     subcategory: "",
     // dayjs().subtract(1, 'year'), dayjs()
     createdAt: [null,null],
@@ -25,7 +26,7 @@ function App() {
     price: [10, 100],
     sale_price: [10, 100]
   });
-  const [sortBy, setSortBy] = useState([]); // Define sortBy state
+  // Define sortBy state
 
   // Rest of your code...
 
@@ -34,7 +35,7 @@ function App() {
   const columns = useMemo(() => [
     { accessorKey: "id", header: "ID", size: 50 },
     { accessorKey: "name", header: "Name", size: 150 },
-    { accessorKey: "category", header: "Category", size: 100 },
+    { accessorKey: "category", header: "Category", size: 100 , filterVariant: 'multi-select'},
     { accessorKey: "subcategory", header: "Subcategory", size: 120 },
     { accessorKey: "createdAt", header: "Created At", size: 200 },
     { accessorKey: "updatedAt", header: "Updated At", size: 200 },
@@ -76,7 +77,9 @@ function App() {
       const updatedAt = dayjs(row.updatedAt);
       return (
         row.name.toLowerCase().includes(filters.name.toLowerCase()) &&
-        row.category.toLowerCase().includes(filters.category.toLowerCase()) &&
+        // row.category.toLowerCase().includes(filters.category.toLowerCase()) &&
+        // row.subcategory.toLowerCase().includes(filters.subcategory.toLowerCase()) &&
+        (filters.category.length === 0 || filters.category.some(cat => row.category.toLowerCase().includes(cat.toLowerCase()))) &&
         row.subcategory.toLowerCase().includes(filters.subcategory.toLowerCase()) &&
         row.price >= filters.price[0] &&
         row.price <= filters.price[1] &&
@@ -95,6 +98,7 @@ function App() {
     enableColumnResizing: true,
     enableStickyHeader: true,
     enableStickyFooter: true,
+    enableFacetedValues: true,
     paginationDisplayMode: "pages",
     enableColumnActions: false,
     manualPagination: false,
@@ -132,7 +136,7 @@ function App() {
   const handleFilterChange = (field, value) => {
     setFilters({
       ...filters,
-      [field]: value
+      [field]: Array.isArray(value) ? value : [value],
     });
   };
 
@@ -140,7 +144,7 @@ function App() {
     console.log("Entered filter")
     setFilters({
       name: "",
-      category: "",
+      category: [],
       subcategory: "",
       // dayjs().subtract(1, 'year'), dayjs()
       createdAt: [null,null],
@@ -152,6 +156,7 @@ function App() {
   };
 
   const handleSortChange = (column) => {
+    console.log("Button Clicked")
     const newSortBy =  [...sortBy] ;
     const sortIndex = newSortBy.findIndex((sortItem) => sortItem.id === column.accessorKey);
     if (sortIndex !== -1) {
@@ -179,7 +184,7 @@ function App() {
       />
       <MaterialReactTable table={table} />
     </Stack> */}
-      <MaterialReactTable table={table} />
+      
       {/* </div> */}
     
       <IconButton
@@ -205,6 +210,7 @@ function App() {
                 </ListItemButton>
               </ListItem>
             ))}
+            <Button type="button" onClick={()=>handleClearFilters()}>Clear Sort</Button>
           </List>
         </div>
       </Drawer>
@@ -217,8 +223,10 @@ function App() {
         <div style={{ width: 250, padding: 16 }}>
           <h3>Filters</h3>
           <div>
-            <label>Name</label>
+            {/* <label>Name</label> */}
+           
             <TextField
+             placeholder = "Name"
               fullWidth
               value={filters.name}
               onChange={(e) => handleFilterChange("name", e.target.value)}
@@ -230,8 +238,9 @@ function App() {
               <Select
                 value={filters.category}
                 onChange={(e) => handleFilterChange("category", e.target.value)}
+                renderValue={(selected) => selected.join(', ')}
               >
-                <MenuItem value=""><em>None</em></MenuItem>
+                <MenuItem  className="dropdown" value=""><em>None</em></MenuItem>
                 <MenuItem value="Activity">Activity</MenuItem>
                 <MenuItem value="Automotive">Automotive</MenuItem>
                 <MenuItem value="Beauty">Beauty</MenuItem>
@@ -258,31 +267,35 @@ function App() {
               </Select>
             </FormControl>
           </div>
-          <div>
-            <label>Created At</label>
+          <div className="created-at">
+            <label className="create">Created At</label>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Start Date"
+                className="calendor"
                 value={filters.createdAt[0]}
                 onChange={(newValue) => handleFilterChange("createdAt", [newValue, filters.createdAt[1]])}
               />
               <DatePicker
                 label="End Date"
+                className="calendor"
                 value={filters.createdAt[1]}
                 onChange={(newValue) => handleFilterChange("createdAt", [filters.createdAt[0], newValue])}
               />
             </LocalizationProvider>
           </div>
           <div>
-            <label>Updated At</label>
+            <label className="create">Updated At</label>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Start Date"
+                className="calendor"
                 value={filters.updatedAt[0]}
                 onChange={(newValue) => handleFilterChange("updatedAt", [newValue, filters.updatedAt[1]])}
               />
               <DatePicker
                 label="End Date"
+                className="calendor"
                 value={filters.updatedAt[1]}
                 onChange={(newValue) => handleFilterChange("updatedAt", [filters.updatedAt[0], newValue])}
               />
@@ -320,7 +333,7 @@ function App() {
         </div>
       </Drawer>
       
-      
+      <MaterialReactTable table={table} />
     </div>
   );
 }
