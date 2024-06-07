@@ -1,0 +1,52 @@
+hr{
+    display: none ;
+}
+
+
+
+  li{
+    border-radius: 5px !important;
+    border: 1px solid black !important;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+  }
+  li:checked{
+    background-color:  rgba(0, 0, 0, 0.08);
+   
+   
+  }
+  ul{
+    gap: 2px;
+  }
+  
+  button{
+    border-radius: inherit !important;
+  }
+
+  .MuiButtonBase-root{
+    display: flex !important;
+    align-items: center;
+    justify-content: center !important;
+  }
+
+  .MuiDrawer-paper {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .MuiDrawer-paper h3 {
+    margin: 0 0 20px 0;
+  }
+  
+  .MuiDrawer-paper div {
+    margin-bottom: 20px;
+  }
+  .table-container {
+    margin: 20px;
+  }
+  
+  
