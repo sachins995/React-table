@@ -120,13 +120,13 @@ css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper{
 }
 
 .css-h4y409-MuiList-root{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
 }
 
 .css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root{
-    height: 30px;
+    height: 30px !important;
 }
 
 .css-10hburv-MuiTypography-root{
