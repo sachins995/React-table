@@ -13,7 +13,6 @@ import dayjs from "dayjs";
 
 function App() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  // const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const [isSortDrawerOpen, setIsSortDrawerOpen] = useState(false);
   const [groupedColumnMode, setGroupedColumnMode] = useState('reorder');
   const [sortBy, setSortBy] = useState([]);
@@ -21,7 +20,6 @@ function App() {
     name: "",
     category: [],
     subcategory: "",
-    // dayjs().subtract(1, 'year'), dayjs()
     createdAt: [null,null],
     updatedAt: [null,null],
     price: [10, 100],
@@ -99,7 +97,6 @@ function App() {
   const table = useMaterialReactTable({
     columns,
     data: filteredData,
-    // initialState: {  },
     enableColumnResizing: true,
     enableStickyHeader: true,
     enableStickyFooter: true,
@@ -112,7 +109,7 @@ function App() {
     enableGrouping: true,
     groupedColumnMode,
     initialState: {
-      // sorting: sortBy,
+      sorting: sortBy,
       // expanded: true, //expand all groups by default
       // grouping: [""], //an array of columns to group by by default (can be multiple)
       pagination: { pageSize: 10, pageIndex: 0 },
@@ -151,10 +148,8 @@ function App() {
       name: "",
       category: [],
       subcategory: "",
-      // dayjs().subtract(1, 'year'), dayjs()
       createdAt: [null,null],
-      // dayjs().subtract(1, 'year'), dayjs()
-      updatedAt: [null,null],
+       updatedAt: [null,null],
       price: [10, 100],
       sale_price: [10, 100]
     });
@@ -165,14 +160,12 @@ function App() {
     const newSortBy =  [...sortBy] ;
     const sortIndex = newSortBy.findIndex((sortItem) => sortItem.id === column.accessorKey);
     if (sortIndex !== -1) {
-      // Toggle sorting direction
       newSortBy[sortIndex].desc = !newSortBy[sortIndex].desc;
     } else {
-      // Add new sorting configuration
       newSortBy.push({ id: column.accessorKey, desc: false });
     }
     setSortBy(newSortBy);
-    setIsSortDrawerOpen(false); // Close the drawer after selecting a column to sort
+    setIsSortDrawerOpen(false);
   };
   const handleClearFilters = () => {
     setSortBy([]);
@@ -180,25 +173,14 @@ function App() {
 
 
   return (
-    // <div>
+   
        <div className="table-container">
-        {/* <Stack gap="1rem">
-      <DemoRadioGroup
-        groupedColumnMode={groupedColumnMode}
-        setGroupedColumnMode={setGroupedColumnMode}
-      />
-      <MaterialReactTable table={table} />
-    </Stack> */}
-      
-      {/* </div> */}
-    
       <IconButton
         onClick={() => setIsDrawerOpen(true)}
         sx={{ position: "relative", top: 16, right: 16 }}
       >
         <FilterAltIcon />
       </IconButton>
-      {/* <Button type="submit" onClick ={()=>setIsSortDrawerOpen(true)}>Sort</Button> */}
       <Box>
       <Box display="flex" justifyContent="flex-end" p={2}>
         <Button variant="contained" startIcon={<SortIcon />} onClick={() => setIsSortDrawerOpen(true)}>
@@ -228,8 +210,6 @@ function App() {
         <div style={{ width: 250, padding: 16 }}>
           <h3>Filters</h3>
           <div>
-            {/* <label>Name</label> */}
-           
             <TextField
              placeholder = "Name"
               fullWidth
