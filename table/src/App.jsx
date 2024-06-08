@@ -1,4 +1,5 @@
 import "./App.css";
+import moment from "moment"
 import CompleteData from "./Data.json";
 import { MaterialReactTable, useMaterialReactTable } from "material-react-table";
 import { useMemo, useState } from "react";
@@ -26,19 +27,23 @@ function App() {
     price: [10, 100],
     sale_price: [10, 100]
   });
-  // Define sortBy state
-
-  // Rest of your code...
-
-  
-
   const columns = useMemo(() => [
     { accessorKey: "id", header: "ID", size: 50 },
     { accessorKey: "name", header: "Name", size: 150 },
     { accessorKey: "category", header: "Category", size: 100 , filterVariant: 'multi-select'},
     { accessorKey: "subcategory", header: "Subcategory", size: 120 },
-    { accessorKey: "createdAt", header: "Created At", size: 200 },
-    { accessorKey: "updatedAt", header: "Updated At", size: 200 },
+    {
+      accessorKey: "createdAt",
+      header: "Created At",
+      size: 200,
+      Cell: ({ cell }) => moment(cell.getValue()).format("DD-MMM-YYYY HH:mm")
+    },
+    {
+      accessorKey: "updatedAt",
+      header: "Updated At",
+      size: 200,
+      Cell: ({ cell }) => moment(cell.getValue()).format("DD-MMM-YYYY HH:mm")
+    },
     {
       accessorKey: "price",
       header: "Price",
